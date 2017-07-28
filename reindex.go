@@ -269,7 +269,11 @@ func (s *ReindexService) Do(ctx context.Context) (*BulkIndexByScrollResponse, er
 
 	// Get HTTP response
 	res, err := s.client.PerformRequest(ctx, "POST", path, params, body)
+	fmt.Printf("DEBUGLOG:PerformRequest:%+v", path)
+	fmt.Printf("DEBUGLOG:PerformRequest:%+v", params)
+	fmt.Printf("DEBUGLOG:PerformRequest:%+v", body)
 	if err != nil {
+		fmt.Printf("DEBUGLOG:PerformRequest:err:%+v", err)
 		return nil, err
 	}
 

@@ -1176,6 +1176,8 @@ func (c *Client) mustActiveConn() error {
 // This is necessary for services that expect e.g. HTTP status 404 as a
 // valid outcome (Exists, IndicesExists, IndicesTypeExists).
 func (c *Client) PerformRequest(ctx context.Context, method, path string, params url.Values, body interface{}, ignoreErrors ...int) (*Response, error) {
+
+	fmt.Printf("DEBUGLOG:PerformRequest:%+v", path)
 	start := time.Now().UTC()
 
 	c.mu.RLock()
@@ -1293,6 +1295,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 		conn.MarkAsHealthy()
 
 		resp, err = c.newResponse(res)
+		fmt.Printf("DEBUGLOG:PerformRequest:c.newResponse:%+v", err)
 		if err != nil {
 			return nil, err
 		}
