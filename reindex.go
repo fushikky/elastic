@@ -250,6 +250,7 @@ func (s *ReindexService) getBody() (interface{}, error) {
 // Do executes the operation.
 func (s *ReindexService) Do(ctx context.Context) (*BulkIndexByScrollResponse, error) {
 	// Check pre-conditions
+	fmt.Println("DEBUGLOG:Do")
 	if err := s.Validate(); err != nil {
 		return nil, err
 	}
