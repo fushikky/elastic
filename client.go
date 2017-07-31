@@ -1259,6 +1259,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 		// Get response
 		fmt.Println("DEBUGLOG:c.c.Do((*http.Request)(req).WithContext(ctx))")
 		res, err := c.c.Do((*http.Request)(req).WithContext(ctx))
+		fmt.Printf("res:%+v\n", res)
 		fmt.Println("DEBUGLOG:c.c.Do((*http.Request)(req).WithContext(ctx)):DONE")
 		if err == context.Canceled || err == context.DeadlineExceeded {
 			// Proceed, but don't mark the node as dead
