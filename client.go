@@ -1261,9 +1261,12 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 			return nil, err
 		}
 		if err != nil {
+			fmt.Println("Do.WithContext:err:%+v", err)
 			n++
 			wait, ok, rerr := c.retrier.Retry(ctx, n, (*http.Request)(req), res, err)
+			fmt.Println("c.retrier.Retry")
 			if rerr != nil {
+				fmt.Printf("c.retrier.Retry:rerr:%+v\n", rerr)
 				c.errorf("elastic: %s is dead", conn.URL())
 				conn.MarkAsDead()
 				return nil, rerr
@@ -1275,6 +1278,8 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 			}
 			retried = true
 			time.Sleep(wait)
+			fmt.Println("time.Sleep")
+			fmt.Println("Sleep:n:%+v\n", n)
 			continue // try again
 		}
 		if res.Body != nil {
