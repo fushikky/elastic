@@ -1177,7 +1177,7 @@ func (c *Client) mustActiveConn() error {
 // valid outcome (Exists, IndicesExists, IndicesTypeExists).
 func (c *Client) PerformRequest(ctx context.Context, method, path string, params url.Values, body interface{}, ignoreErrors ...int) (*Response, error) {
 
-	fmt.Printf("DEBUGLOG:PerformRequest:%+v", path)
+	fmt.Printf("DEBUGLOG:PerformRequest:%+v\n", path)
 	start := time.Now().UTC()
 
 	c.mu.RLock()
@@ -1295,7 +1295,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 		conn.MarkAsHealthy()
 
 		resp, err = c.newResponse(res)
-		fmt.Printf("DEBUGLOG:PerformRequest:c.newResponse:%+v", err)
+		fmt.Printf("DEBUGLOG:PerformRequest:c.newResponse:%+v\n", err)
 		if err != nil {
 			return nil, err
 		}
