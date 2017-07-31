@@ -1254,6 +1254,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 		c.dumpRequest((*http.Request)(req))
 
 		// Get response
+		fmt.Println("DEBUGLOG:c.c.Do((*http.Request)(req).WithContext(ctx))")
 		res, err := c.c.Do((*http.Request)(req).WithContext(ctx))
 		if err == context.Canceled || err == context.DeadlineExceeded {
 			// Proceed, but don't mark the node as dead
@@ -1280,10 +1281,12 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 			defer res.Body.Close()
 		}
 
+		fmt.Println("DEBUGLOG:Tracing")
 		// Tracing
 		c.dumpResponse(res)
 
 		// Check for errors
+		fmt.Println("DEBUGLOG:checkResponse")
 		if err := checkResponse((*http.Request)(req), res, ignoreErrors...); err != nil {
 			// No retry if request succeeded
 			// We still try to return a response.
