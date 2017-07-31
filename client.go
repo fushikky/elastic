@@ -1209,8 +1209,10 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 
 		// Get a connection
 		conn, err = c.next()
+		fmt.Printf("Get a connection:err:%+v\n", err)
 		if errors.Cause(err) == ErrNoClient {
 			n++
+			fmt.Printf("n:%+v\n", n)
 			if !retried {
 				// Force a healtcheck as all connections seem to be dead.
 				c.healthcheck(timeout, false)
@@ -1224,6 +1226,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 			}
 			retried = true
 			time.Sleep(wait)
+			fmt.Println("time.Sleep")
 			continue // try again
 		}
 		if err != nil {
