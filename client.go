@@ -1177,7 +1177,7 @@ func (c *Client) mustActiveConn() error {
 // valid outcome (Exists, IndicesExists, IndicesTypeExists).
 func (c *Client) PerformRequest(ctx context.Context, method, path string, params url.Values, body interface{}, ignoreErrors ...int) (*Response, error) {
 
-	fmt.Printf("DEBUGLOG:PerformRequest:%+v\n", path)
+	fmt.Println("DEBUGLOG:PerformRequest:method")
 	start := time.Now().UTC()
 
 	c.mu.RLock()
@@ -1290,6 +1290,7 @@ func (c *Client) PerformRequest(ctx context.Context, method, path string, params
 		if err := checkResponse((*http.Request)(req), res, ignoreErrors...); err != nil {
 			// No retry if request succeeded
 			// We still try to return a response.
+			fmt.Println("DEBUGLOG:checkResponse:err:%+v\n", err)
 			resp, _ = c.newResponse(res)
 			return resp, err
 		}
