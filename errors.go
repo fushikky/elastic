@@ -22,6 +22,8 @@ import (
 // The func tries to parse error details as returned from Elasticsearch
 // and encapsulates them in type elastic.Error.
 func checkResponse(req *http.Request, res *http.Response, ignoreErrors ...int) error {
+	fmt.Println("checkResponse:method")
+	fmt.Printf("checkResponse:res.StatusCode:%v\n", res.StatusCode)
 	// 200-299 are valid status codes
 	if res.StatusCode >= 200 && res.StatusCode <= 299 {
 		return nil
